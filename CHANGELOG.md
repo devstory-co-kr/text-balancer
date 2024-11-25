@@ -1,3 +1,8 @@
+## 0.1.6
+
+* Add isBalanced property.
+* Change textScaleFactor property to textScale.
+
 ## 0.1.5
 
 * Change algorithms with dynamic programming
