@@ -19,6 +19,7 @@ class TextBalancer extends StatelessWidget {
     this.textHeightBehavior,
     this.selectionColor,
     this.minLines,
+    this.isBalanced = true,
   });
 
   final String data;
@@ -39,18 +40,25 @@ class TextBalancer extends StatelessWidget {
 
   /// TextBalancer properties
   final int? minLines;
+  final bool isBalanced;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = style ?? DefaultTextStyle.of(context).style;
     return LayoutBuilder(
       builder: (context, constraints) => Text(
-        balanced(
-          data,
-          textStyle: textStyle,
-          maxWidth: constraints.maxWidth,
-          minLines: minLines,
-        ),
+        isBalanced
+            ? balanced(
+                data,
+                textStyle: textStyle,
+                maxWidth: constraints.maxWidth,
+                minLines: minLines,
+              )
+            : wordBreak(
+                data,
+                textStyle: textStyle,
+                maxWidth: constraints.maxWidth,
+              ),
         style: textStyle,
         strutStyle: strutStyle,
         textAlign: textAlign,
