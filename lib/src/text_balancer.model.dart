@@ -1,5 +1,33 @@
 part of '../text_balancer.dart';
 
+/// Word break
+String wordBreak(
+  String text, {
+  required TextStyle textStyle,
+  required double maxWidth,
+}) {
+  if (text.trim().isEmpty) return text;
+  final double space = _getTextWidth(' ', textStyle);
+  final List<String> words = text.split(' ');
+  final List<double> wordWidthList = words.map((w) {
+    return _getTextWidth(w, textStyle);
+  }).toList();
+  String line = "";
+  List<String> lines = [];
+  for (int i = 0; i < words.length; i++) {
+    final lineWidth = _getTextWidth(line, textStyle);
+    final isNext = i + 1 < words.length;
+    final nextLineWidth = lineWidth + wordWidthList[i] + (isNext ? space : 0);
+    if (nextLineWidth >= maxWidth) {
+      lines.add(line);
+      line = "";
+    }
+    line += words[i] + (isNext ? " " : "");
+  }
+  lines.add(line);
+  return lines.join("\n");
+}
+
 /// Proportional font divide algorithm
 String balanced(
   String text, {

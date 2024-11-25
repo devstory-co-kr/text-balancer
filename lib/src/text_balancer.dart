@@ -12,13 +12,14 @@ class TextBalancer extends StatelessWidget {
     this.locale,
     this.softWrap,
     this.overflow,
-    this.textScaleFactor,
+    this.textScale,
     this.maxLines,
     this.semanticsLabel,
     this.textWidthBasis,
     this.textHeightBehavior,
     this.selectionColor,
     this.minLines,
+    this.isBalanced = true,
   });
 
   final String data;
@@ -30,7 +31,7 @@ class TextBalancer extends StatelessWidget {
   final Locale? locale;
   final bool? softWrap;
   final TextOverflow? overflow;
-  final double? textScaleFactor;
+  final TextScaler? textScale;
   final int? maxLines;
   final String? semanticsLabel;
   final TextWidthBasis? textWidthBasis;
@@ -39,18 +40,25 @@ class TextBalancer extends StatelessWidget {
 
   /// TextBalancer properties
   final int? minLines;
+  final bool isBalanced;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = style ?? DefaultTextStyle.of(context).style;
     return LayoutBuilder(
       builder: (context, constraints) => Text(
-        balanced(
-          data,
-          textStyle: textStyle,
-          maxWidth: constraints.maxWidth,
-          minLines: minLines,
-        ),
+        isBalanced
+            ? balanced(
+                data,
+                textStyle: textStyle,
+                maxWidth: constraints.maxWidth,
+                minLines: minLines,
+              )
+            : wordBreak(
+                data,
+                textStyle: textStyle,
+                maxWidth: constraints.maxWidth,
+              ),
         style: textStyle,
         strutStyle: strutStyle,
         textAlign: textAlign,
@@ -58,7 +66,7 @@ class TextBalancer extends StatelessWidget {
         locale: locale,
         softWrap: softWrap,
         overflow: overflow,
-        textScaleFactor: textScaleFactor,
+        textScaler: textScale,
         maxLines: maxLines,
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
