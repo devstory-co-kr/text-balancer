@@ -1,7 +1,7 @@
 Flutter package that makes text more readable.<br>
 It works with fixed-width as well as variable-width fonts.
 
-![text balancer](https://github.com/nero-angela/flutter_text_balancer/assets/26322627/d707b1c1-ac54-4460-bf6c-87cb4f09c1ca)
+![text balancer demo](https://github.com/user-attachments/assets/e58b0433-f315-4168-be77-980fa9e00a10)
 
 ## How To Use
 ```dart
@@ -22,7 +22,7 @@ Text('text').balance(
 ```
 
 ## Performance
-![performance](https://github.com/nero-angela/flutter_text_balancer/assets/26322627/17262c38-75e7-469c-9a05-9b61be9248e7)
+![performance](https://github.com/user-attachments/assets/9c5890c8-40cc-491b-b535-f2cee4c41d80)
 
 - Time complexity : `n^2`
 
